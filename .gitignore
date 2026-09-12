@@ -13,3 +13,7 @@ __pycache__/
 # IDE and OS files
 .DS_Store
 Thumbs.db
+
+# Local helper scripts
+push_to_github.bat
+
