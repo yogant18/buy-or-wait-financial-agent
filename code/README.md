@@ -1,6 +1,6 @@
 # Buy or Wait? — AI Financial Decision Agent
 
-## HackerRank Orchestrate (September 2026) Challenge Submission
+## HackerRank Orchestrate Challenge Submission
 
 ### Overview
 This package contains the complete solution for the **Buy or Wait?** financial decision agent challenge. The system evaluates purchase and payment requests by reconstructing each user's financial position, detecting recurring commitments, forecasting cash flows over a conservative 90-day period, enforcing minimum balance constraints, and generating grounded explanations.
