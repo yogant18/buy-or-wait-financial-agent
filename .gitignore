@@ -1,0 +1,15 @@
+# Environment secrets
+.env
+*.env
+
+# Agent logs (mandatory per AGENTS.md)
+log.txt
+
+# Python artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# IDE and OS files
+.DS_Store
+Thumbs.db
