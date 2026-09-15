@@ -1,0 +1,23 @@
+[project]
+name = "Buy or Wait? — AI Financial Agent"
+description = "An AI-powered financial decision agent that tells you whether to buy, wait, use installments, or avoid a purchase — grounded in your real financial data."
+
+[UI]
+name = "Buy or Wait?"
+show_readme_as_default = false
+default_collapse_content = false
+hide_cot = true
+layout = "wide"
+
+[UI.theme]
+default = "dark"
+    [UI.theme.dark]
+    background = "#0f1117"
+    paper = "#1a1d27"
+
+    primary = "#7c5cbf"
+    text_primary = "#e8e8f0"
+    text_secondary = "#9999bb"
+
+[meta]
+generated_by = "chainlit"
