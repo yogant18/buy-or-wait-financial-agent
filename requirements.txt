@@ -1,5 +1,4 @@
 gradio==6.27.0
-spaces
 pandas
 easyocr
 Pillow

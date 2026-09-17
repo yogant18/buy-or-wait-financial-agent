@@ -28,7 +28,6 @@ if os.path.exists(_env_path):
                 _k, _v = _line.split("=", 1)
                 os.environ.setdefault(_k.strip(), _v.strip())
 
-import spaces
 import gradio as gr
 
 from data_loader import load_all_data
@@ -303,8 +302,6 @@ _theme = gr.themes.Soft(
 )
 
 
-# Thin GPU wrapper — satisfies ZeroGPU requirement; real work is CPU-only in _run_chat
-@spaces.GPU(duration=120)
 def chat(message: str, history: list) -> str:
     return _run_chat(message, history)
 
