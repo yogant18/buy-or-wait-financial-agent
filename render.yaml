@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: buy-or-wait
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # you'll paste the value in Render dashboard
+      - key: PYTHON_VERSION
+        value: "3.11"
+    autoDeploy: true

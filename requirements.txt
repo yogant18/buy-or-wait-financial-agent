@@ -1,4 +1,3 @@
 gradio==6.27.0
 pandas
-easyocr
 Pillow

@@ -1,5 +1,5 @@
 """
-Root app.py — HF Spaces entry point (Gradio SDK).
+Root app.py — entry point for Render / HF Spaces (Gradio SDK).
 Delegates to gradio_app/app.py.
 """
 import sys
@@ -12,7 +12,7 @@ from app import demo, _load_data, _theme
 _load_data()
 demo.launch(
     server_name="0.0.0.0",
-    server_port=7860,
+    server_port=int(os.environ.get("PORT", 7860)),
     show_error=True,
     theme=_theme,
 )
