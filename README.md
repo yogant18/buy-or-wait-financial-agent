@@ -4,7 +4,7 @@
 
 An intelligent financial agent that analyses your real financial profile and tells you whether to **buy now**, **wait**, **use installments**, or **avoid** a purchase — grounded in 90-day cash flow forecasting, fixed exchange rates, and LLM-powered explanations.
 
-🚀 **[Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/Sugarz3ro/buy-or-wait)**
+🚀 **[Live Demo on Render](https://buy-or-wait-financial-agent.onrender.com/)** &nbsp;[![Deploy Status](https://img.shields.io/badge/Render-Live-brightgreen?logo=render)](https://buy-or-wait-financial-agent.onrender.com/)
 
 ---
 

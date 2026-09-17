@@ -1,122 +1,67 @@
-# Deployment Guide — Hugging Face Spaces (Gradio SDK — FREE)
+# Deployment Guide — Render.com (FREE)
 
-Deploy the **Buy or Wait?** AI Financial Agent as a free, always-on Gradio chat app on Hugging Face Spaces.
+Deploy the **Buy or Wait?** AI Financial Agent as a free Gradio chat app on Render.com.
 
-> **No Docker required.** Uses the Gradio SDK — completely free tier.
+> **Live Demo:** [https://buy-or-wait-financial-agent.onrender.com/](https://buy-or-wait-financial-agent.onrender.com/)
 
 ---
 
 ## Prerequisites
 
-- A free account at [huggingface.co](https://huggingface.co)
-- Git installed locally
+- A free account at [render.com](https://render.com)
 - Your `GROQ_API_KEY` from [console.groq.com](https://console.groq.com)
+- GitHub repo: `yogant18/buy-or-wait-financial-agent`
 
 ---
 
-## Step 1 — Create a New Space
+## Step 1 — Sign Up on Render
 
-1. Go to [huggingface.co/new-space](https://huggingface.co/new-space)
-2. Fill in:
-   - **Space name**: `buy-or-wait`
-   - **License**: MIT
-   - **SDK**: **Gradio** ← select this (it's FREE)
-   - **Visibility**: Public
-3. Click **Create Space**
+1. Go to [render.com](https://render.com)
+2. Click **Sign Up with GitHub** — connect your GitHub account
 
 ---
 
-## Step 2 — Add Your Groq API Key as a Secret
+## Step 2 — Create a New Web Service
 
-1. In your Space, go to **Settings → Variables and Secrets**
-2. Under **Repository Secrets**, click **New secret**
-3. Name: `GROQ_API_KEY`
-4. Value: your key (starts with `gsk_...`)
-5. Click **Save**
-
-> Your key is injected as an env variable at runtime — never stored in code or committed to git.
+1. Click **New → Web Service**
+2. Select **"Build and deploy from a Git repository"**
+3. Connect: **`yogant18/buy-or-wait-financial-agent`**
 
 ---
 
-## Step 3 — Push This Repo to HF Spaces
+## Step 3 — Configure the Service
 
-HF Spaces is just a git remote. Add it and push:
+Render auto-detects the `Dockerfile`. Fill in:
 
-```bash
-# Add HF Spaces as a remote (replace YOUR_USERNAME)
-git remote add hf https://huggingface.co/spaces/YOUR_USERNAME/buy-or-wait
-
-# Push
-git push hf main
-```
-
-> First push may ask for your HF username + password (or access token from hf.co/settings/tokens).
+| Field | Value |
+|---|---|
+| **Name** | `buy-or-wait-financial-agent` |
+| **Branch** | `main` |
+| **Language** | Docker (auto-detected) |
+| **Instance Type** | **Free** |
 
 ---
 
-## Step 4 — Wait for the Build (~2 min)
+## Step 4 — Add Environment Variable
 
-1. Go to: `https://huggingface.co/spaces/YOUR_USERNAME/buy-or-wait`
-2. You'll see a **Building** badge — it turns **Running** in about 2 minutes
-3. HF Spaces reads `requirements.txt` and `app.py` automatically
+Scroll to **Environment Variables** → Add:
+
+| Key | Value |
+|---|---|
+| `GROQ_API_KEY` | your key from console.groq.com |
 
 ---
 
-## Step 5 — Use the App
+## Step 5 — Deploy
 
-Once running, try these in the chat:
+Click **Create Web Service** — build takes ~3-5 minutes.
+
+---
+
+## Your Live URL
 
 ```
-check request_26
-check request_50
-user_27 can I buy a laptop?
-list
-help
-```
-
----
-
-## File Structure HF Spaces Expects
-
-```
-repo root/
-├── app.py              ← HF Spaces entry point (required at root)
-├── requirements.txt    ← Python deps (gradio, pandas, easyocr, Pillow)
-├── code/               ← Financial engine
-├── dataset/            ← CSV data files
-└── gradio_app/
-    └── app.py          ← Full Gradio UI implementation
-```
-
----
-
-## Local Testing (No Docker Needed)
-
-```bash
-# Install deps
-pip install -r requirements.txt
-
-# Set your key
-set GROQ_API_KEY=gsk_...      # Windows
-export GROQ_API_KEY=gsk_...   # Mac/Linux
-
-# Run
-python app.py
-
-# Open browser at:
-# http://localhost:7860
-```
-
----
-
-## Updating the Deployment
-
-Any push triggers an auto-rebuild:
-
-```bash
-git add .
-git commit -m "update: improved UI"
-git push hf main
+https://buy-or-wait-financial-agent.onrender.com/
 ```
 
 ---
@@ -125,21 +70,18 @@ git push hf main
 
 | Issue | Fix |
 |---|---|
-| Space stuck on "Building" | Check the **Logs** tab in the Space UI |
-| `GROQ_API_KEY` not found | Re-add in Settings → Secrets; name must match exactly |
-| `ModuleNotFoundError: gradio` | Ensure `gradio>=4.0.0` is in `requirements.txt` |
+| App sleeps after 15 min | Normal on free tier — wakes in ~30s on next visit |
+| Build fails | Check Render logs tab for errors |
+| `GROQ_API_KEY` not found | Re-add in Environment tab; name must match exactly |
 | Dataset not found | Make sure `dataset/` folder is committed and pushed |
-| EasyOCR slow first run | Normal — model downloads once on first request (~150MB) |
 
 ---
 
-## Your Space URL
+## Updating the Deployment
 
-```
-https://huggingface.co/spaces/YOUR_USERNAME/buy-or-wait
-```
+Any push to `main` triggers an auto-redeploy:
 
-Shareable embed URL:
-```
-https://YOUR_USERNAME-buy-or-wait.hf.space
-```
+```bash
+git add .
+git commit -m "update: your change"
+git push origin main
